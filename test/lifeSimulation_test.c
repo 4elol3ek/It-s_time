@@ -55,7 +55,7 @@ void testLifeSimulation(){
     result = changeCellWeight(result, 2,2);
     result = changeCellWeight(result, 2,3);
     result = lifeSimulation(result);
-    isEqual(1,isEqualField(expected,result),1);
+    isEqual(1,isEqualField(expected,result),2);
 
     //проверяем случай, когда у клетки 2 соседа 
     //заодно проверяем простейший пульсар
@@ -66,7 +66,7 @@ void testLifeSimulation(){
     expected = result;
     result = lifeSimulation(result);
     result = lifeSimulation(result);
-    isEqual(1,isEqualField(expected,result),1);
+    isEqual(1,isEqualField(expected,result),3);
     
     //проверяем статичную фигуру
     //не знаю зачем...
@@ -79,7 +79,7 @@ void testLifeSimulation(){
     //клетки создают квадрат
     result = lifeSimulation(result);
     result = lifeSimulation(result);
-    isEqual(1,isEqualField(expected,result),1);
+    isEqual(1,isEqualField(expected,result),4);
 }
 
 int main(int argc, char const *argv[])
