@@ -49,7 +49,6 @@ int WinMain(HINSTANCE hInstance,
             MB_ICONEXCLAMATION | MB_OK);
         return 0;
     }
-    lifeManage;
     ShowWindow(hwnd, nCmdShow);
     UpdateWindow(hwnd);
 
@@ -131,10 +130,11 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam)
         if (LOWORD(wParam) == 1)
         { // Step button
             Tfield = lifeSimulation(Tfield);
-            // PAINTSTRUCT ps;
-            // HDC hdc = BeginPaint(hwnd, &ps);
-            // DrawGrid(hdc, Tfield);
-            // EndPaint(hwnd, &ps);
+            PAINTSTRUCT ps;
+            HDC hdc = BeginPaint(hwnd, &ps);
+            DrawGrid(hdc, Tfield);
+            EndPaint(hwnd, &ps);
+            InvalidateRect(hwnd, &gridRect, TRUE);
         }
         else if (LOWORD(wParam) == 2)
         { // Clear button
