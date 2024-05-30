@@ -1,8 +1,6 @@
 a.exe 
 main.o 
 lifeSimulation.o
-src/LIFE.exe
-
 src/lifeSimulation.exe
 main.c
 main.exe
