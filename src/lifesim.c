@@ -3,8 +3,12 @@
 #include "lifeSimulation.h"
 
 #define CELL_SIZE 10
+#ifndef HEIGHT
 #define HEIGHT 10
-#define WEIGHT 10
+#endif
+#ifndef LENGTH
+#define LENGTH 10
+#endif
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 field Tfield;
@@ -69,7 +73,7 @@ field DrawGrid(HDC hdc, field curr)
 
     for (int y = 0; y < HEIGHT; y++)
     {
-        for (int x = 0; x < WEIGHT; x++)
+        for (int x = 0; x < LENGTH; x++)
         {
             RECT cellRect = {x * CELL_SIZE,
                              y * CELL_SIZE,
@@ -85,7 +89,7 @@ field DrawGrid(HDC hdc, field curr)
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 {
-    static RECT gridRect = {0, 0, CELL_SIZE * 10, CELL_SIZE * 10};
+    static RECT gridRect = {0, 0, CELL_SIZE * HEIGHT, CELL_SIZE * LENGTH};
     printf("%d, %d\n", LOWORD(lParam), HIWORD(lParam));
     switch (Msg)
     {

@@ -1,16 +1,22 @@
 #include <stdio.h>
+#ifndef HEIGHT
+#define HEIGHT 10
+#endif
+#ifndef LENGTH
+#define LENGTH 10
+#endif
 // костыль
 typedef struct field
 {
-    int arr[10][10];
+    int arr[HEIGHT][LENGTH];
 } field;
 
 field makeNewField()
 {
     field newField;
-    for (int raw = 0; raw < 10; raw++)
+    for (int raw = 0; raw < HEIGHT; raw++)
     {
-        for (int col = 0; col < 10; col++)
+        for (int col = 0; col < LENGTH; col++)
         {
             newField.arr[raw][col] = 0;
         }
@@ -23,11 +29,11 @@ field makeNewField()
 field lifeSimulation(field f)
 {
     field newField = makeNewField();
-    for (int raw = 0; raw < 10; raw++)
+    for (int raw = 0; raw < HEIGHT; raw++)
     {
-        for (int col = 0; col < 10; col++)
+        for (int col = 0; col < LENGTH; col++)
         {
-            if ((raw == 0) || (raw == 9) || (col == 0) || (col == 9))
+            if ((raw == 0) || (raw == HEIGHT - 1) || (col == 0) || (col == LENGTH - 1))
                 newField.arr[raw][col] = 0;
             else
             {
@@ -49,20 +55,22 @@ field lifeSimulation(field f)
 // изменяем значение выбранной клетки на противоположное
 field changeCellWeight(field field, int raw, int col)
 {
-    if (field.arr[col][raw] == 1)
-        field.arr[col][raw] = 0;
-    else
-        field.arr[col][raw] = 1;
-
+    if (raw <= HEIGHT && raw >= 0 && col <= LENGTH && col >= 0)
+    {
+        if (field.arr[col][raw] == 1)
+            field.arr[col][raw] = 0;
+        else
+            field.arr[col][raw] = 1;
+    }
     return field;
 }
 
 void printField(field field)
 {
-    for (int raw = 0; raw < 10; raw++)
+    for (int raw = 0; raw < HEIGHT; raw++)
     {
         printf("|");
-        for (int col = 0; col < 10; col++)
+        for (int col = 0; col < LENGTH; col++)
         {
             printf("%d|", field.arr[raw][col]);
         }
