@@ -5,7 +5,7 @@ typedef struct field
     int arr[10][10];
 } field;
 
-static field makeNewField()
+field makeNewField()
 {
     field newField;
     for (int raw = 0; raw < 10; raw++)
@@ -49,10 +49,10 @@ field lifeSimulation(field f)
 // изменяем значение выбранной клетки на противоположное
 field changeCellWeight(field field, int raw, int col)
 {
-    if (field.arr[raw][col] == 1)
-        field.arr[raw][col] = 0;
+    if (field.arr[col][raw] == 1)
+        field.arr[col][raw] = 0;
     else
-        field.arr[raw][col] = 1;
+        field.arr[col][raw] = 1;
 
     return field;
 }

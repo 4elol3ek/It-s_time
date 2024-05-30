@@ -1,4 +1,5 @@
 #include <windows.h>
+#include <stdio.h>
 #include "lifeSimulation.h"
 
 #define CELL_SIZE 10
@@ -32,8 +33,8 @@ int WinMain(HINSTANCE hInstance,
         WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT,
         CW_USEDEFAULT,
-        900,
-        600,
+        640,
+        480,
         NULL,
         NULL,
         hInstance,
@@ -86,14 +87,15 @@ field DrawGrid(HDC hdc, field curr)
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 {
     static RECT gridRect = {0, 0, CELL_SIZE * 10, CELL_SIZE * 10};
+    printf("%d, %d\n", LOWORD(lParam), HIWORD(lParam));
     switch (Msg)
     {
     case WM_CREATE:
         hwndStep = CreateWindow(
             "BUTTON",
-            "Start",
+            "Step",
             WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
-            600,
+            500,
             20,
             100,
             30,
@@ -105,8 +107,8 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam)
             "BUTTON",
             "Clear",
             WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
-            600,
-            100,
+            500,
+            60,
             100,
             30,
             hwnd,
@@ -117,8 +119,8 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam)
             "BUTTON",
             "Exit",
             WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
-            600,
-            140,
+            500,
+            100,
             100,
             30,
             hwnd,
@@ -129,15 +131,19 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam)
         if (LOWORD(wParam) == 1)
         { // Step button
             Tfield = lifeSimulation(Tfield);
-            PAINTSTRUCT ps;
-            HDC hdc = BeginPaint(hwnd, &ps);
-            DrawGrid(hdc, Tfield);
-            EndPaint(hwnd, &ps);
+            // PAINTSTRUCT ps;
+            // HDC hdc = BeginPaint(hwnd, &ps);
+            // DrawGrid(hdc, Tfield);
+            // EndPaint(hwnd, &ps);
         }
         else if (LOWORD(wParam) == 2)
         { // Clear button
             Tfield = makeNewField();
             InvalidateRect(hwnd, &gridRect, TRUE);
+            // PAINTSTRUCT ps;
+            // HDC hdc = BeginPaint(hwnd, &ps);
+            // DrawGrid(hdc, Tfield);
+            // EndPaint(hwnd, &ps);
         }
         else if (LOWORD(wParam) == 3)
         { // Exit button
@@ -150,8 +156,19 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam)
         int y = HIWORD(lParam) / CELL_SIZE;
         Tfield = changeCellWeight(Tfield, x, y);
         InvalidateRect(hwnd, &gridRect, TRUE);
+        // PAINTSTRUCT ps;
+        // HDC hdc = BeginPaint(hwnd, &ps);
+        // DrawGrid(hdc, Tfield);
+        // EndPaint(hwnd, &ps);
         break;
-
+    case WM_PAINT:
+    {
+        PAINTSTRUCT ps;
+        HDC hdc = BeginPaint(hwnd, &ps);
+        DrawGrid(hdc, Tfield);
+        EndPaint(hwnd, &ps);
+        break;
+    }
     case WM_DESTROY:
         PostQuitMessage(0);
         break;
