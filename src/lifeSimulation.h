@@ -1,6 +1,8 @@
+#define HEIGHT 10
+#define LENGTH 10
 typedef struct field
 {
-    int arr[10][10];
+    int arr[HEIGHT][LENGTH];
 } field;
 field makeNewField();
 field lifeSimulation(field field);

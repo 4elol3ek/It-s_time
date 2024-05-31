@@ -11,9 +11,9 @@ void isEqual(int expected, int result, int number)
 int isEqualField(field expected, field result)
 {
     int flag = 1;
-    for(int raw = 0; raw < 10; raw++)
+    for(int raw = 0; raw < HEIGHT; raw++)
     {
-        for (int col = 0; col < 10; col++)
+        for (int col = 0; col < LENGTH; col++)
         {
             if(expected.arr[raw][col] != result.arr[raw][col])
             {
