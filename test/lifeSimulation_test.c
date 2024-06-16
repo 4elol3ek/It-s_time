@@ -1,4 +1,4 @@
-#include <src/lifeSimulation.h>
+#include <src/LifeSimulation/lifeSimulation.h>
 #include <stdio.h>
 
 void isEqual(int expected, int result, int number)

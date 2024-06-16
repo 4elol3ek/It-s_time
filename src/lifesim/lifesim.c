@@ -1,6 +1,6 @@
 #include <windows.h>
 #include <stdio.h>
-#include "lifeSimulation.h"
+#include <src/LifeSimulation/lifeSimulation.h>
 
 #define CELL_SIZE 10
 #ifndef HEIGHT
